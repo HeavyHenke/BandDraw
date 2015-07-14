@@ -7,17 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Tapped="Page_Tapped"  >
 
-    <Grid Background="HotPink">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-
-
-    </Grid>
+    <Canvas Background="MintCream" Name="_canvas">
+        
+        <Ellipse Canvas.Left="10" Canvas.Top="10" Stroke="Black" Width="10" Height="10" Name="_marker"></Ellipse>
+        
+    </Canvas>
 </Page>
