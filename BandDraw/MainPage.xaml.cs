@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -97,18 +98,25 @@ namespace BandDraw
             };
         }
 
-        private void BandInputOutputOnGotGyroHighXAcceleration()
+
+        private async void BandInputOutputOnGotGyroHighXAcceleration()
         {
-            var gyro = _bandInputOutput.GyroReading;
-            _yOffset = 0.5 / _yGain - gyro.Y;
-            _zOffset = 0.5 / _zGain - gyro.Z;
+            DispatchedHandler a = () =>
+            {
+                var gyro = _bandInputOutput.GyroReading;
+                _yOffset = 0.5/_yGain - gyro.Y;
+                _zOffset = 0.5/_zGain - gyro.Z;
 
 
-            var x = (_zOffset + gyro.Z) * _zGain;
-            var y = (_yOffset + gyro.Y) * _yGain;
-            Debug.WriteLine($"({x}, {y})");
+                var x = (_zOffset + gyro.Z)*_zGain;
+                var y = (_yOffset + gyro.Y)*_yGain;
+                Debug.WriteLine($"({x}, {y})");
 
-            Debug.WriteLine("Recalibrated");
+                Debug.WriteLine("Recalibrated");
+            };
+
+            await Task.Delay(500);
+            Dispatcher.RunAsync(CoreDispatcherPriority.Normal, a);
         }
     }
 }
